@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Marcus Vinicius de Lima</Authors>
+    <Description>.Net Standard API to access GoogleMaps Webservices</Description>
+    <PackageId>GoogleMapsServicesClient.NETStandard</PackageId>
+    <Product>GoogleMapsServicesClient.NETStandard</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.Linq" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>
