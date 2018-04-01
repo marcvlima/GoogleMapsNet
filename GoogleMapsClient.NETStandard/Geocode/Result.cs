@@ -7,6 +7,7 @@ using System.Text;
 
 namespace GoogleMapsServicesClient.NETStandard.Geocode
 {
+    [Serializable]
     public partial class Result
     {
         [JsonProperty("address_components")]

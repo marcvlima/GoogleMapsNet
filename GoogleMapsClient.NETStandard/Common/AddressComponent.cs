@@ -5,6 +5,7 @@ using System.Text;
 
 namespace GoogleMapsServicesClient.NETStandard.Common
 {
+    [Serializable]
     public partial class AddressComponent
     {
         [JsonProperty("long_name")]

@@ -6,6 +6,7 @@ using System.Text;
 
 namespace GoogleMapsServicesClient.NETStandard.Common
 {
+    [Serializable]
     public partial class Location
     {
         [JsonProperty("lat")]

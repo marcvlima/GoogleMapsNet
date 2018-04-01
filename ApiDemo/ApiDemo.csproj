@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GoogleMapsClient.NETStandard\GoogleMapsServicesClient.NETStandard.csproj">
-      <Project>{DB8CE6EE-7E81-49A0-B157-D4E42C0BA723}</Project>
+      <Project>{db8ce6ee-7e81-49a0-b157-d4e42c0ba723}</Project>
       <Name>GoogleMapsServicesClient.NETStandard</Name>
     </ProjectReference>
   </ItemGroup>

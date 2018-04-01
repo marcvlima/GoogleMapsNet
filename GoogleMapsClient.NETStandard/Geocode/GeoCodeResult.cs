@@ -6,8 +6,8 @@ using System.Text;
 
 namespace GoogleMapsServicesClient.NETStandard.Geocode
 {
-
-    public class GeoCodeResult
+    [Serializable]
+    public class GeocodeResult
     {
         [JsonProperty("results")]
         public IEnumerable<Result> Results { get; set; }

@@ -6,6 +6,9 @@
     <Description>.Net Standard API to access GoogleMaps Webservices</Description>
     <PackageId>GoogleMapsServicesClient.NETStandard</PackageId>
     <Product>GoogleMapsServicesClient.NETStandard</Product>
+    <PackageTags>Google Maps;Geocode;Google</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

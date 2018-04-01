@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 
 namespace GoogleMapsServicesClient.NETStandard.Geocode
 {
@@ -22,12 +19,24 @@ namespace GoogleMapsServicesClient.NETStandard.Geocode
             this.CountryCode = countryCode;
         }
 
-        public GeocodeClient(String mapsUriPath, String mapsApiKey, String countryCode)
+        public GeocodeClient(Uri mapsUri, String mapsApiKey)
+            : this(mapsUri, mapsApiKey, null)
+        {
+            this.BaseGeocodeUri = new Uri(this.BaseMapsUri, "geocode/json?");
+        }
+
+        public GeocodeClient(String mapsUriPath, String mapsApiKey)
             : this(new Uri(mapsUriPath), mapsApiKey, null)
         {
         }
 
-        public GeoCodeResult GetLocationByAddress(String addressInfo)
+        public GeocodeClient(String mapsUriPath, String mapsApiKey, String countryCode)
+            : this(new Uri(mapsUriPath), mapsApiKey, countryCode)
+        {
+            this.CountryCode = countryCode;
+        }
+
+        public GeocodeResult GetLocationByAddress(String addressInfo)
         {
             UriBuilder uriBuilder = new UriBuilder(this.BaseGeocodeUri);
             string query = "key=" + this.MapsKey + "&address=" + addressInfo.Replace(" ", "+");
@@ -39,14 +48,16 @@ namespace GoogleMapsServicesClient.NETStandard.Geocode
             WebRequest request = WebRequest.Create(uriBuilder.Uri);
             WebResponse response = request.GetResponse();
             string responseContent = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<GeoCodeResult>(responseContent);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<GeocodeResult>(responseContent);
         }
 
-        public GeoCodeResult GetLocationByAddress(GeocodeRequestInfo addressInfo)
+        public GeocodeResult GetLocationByAddress(GeocodeRequestInfo addressInfo)
         {
             StringBuilder stringBuilder = new StringBuilder();
             
-            stringBuilder.Append(addressInfo.PlaceNumber.ToString() + " " + addressInfo.PublicPlaceName);
+            stringBuilder.Append(" " + addressInfo.PublicPlaceName);
+            if (addressInfo.PlaceNumber != null)
+                stringBuilder.Append(", " + addressInfo.PlaceNumber.ToString());
             if (!String.IsNullOrEmpty(addressInfo.CityName))
                 stringBuilder.Append(", " + addressInfo.CityName);
             return this.GetLocationByAddress(stringBuilder.ToString());

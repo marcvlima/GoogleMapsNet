@@ -24,7 +24,7 @@ namespace ApiDemo
             });
             try
             {
-                if (response.Status == GeoCodeResult.StatusTypes.OK)
+                if (response.Status == GeocodeResult.StatusTypes.OK)
                     foreach(var sublocality in response.Results.FirstOrDefault().GetSublocalities())
                         Console.WriteLine(sublocality.LongName);
             }
@@ -45,7 +45,7 @@ namespace ApiDemo
             });
             try
             {
-                if (response.Status == GeoCodeResult.StatusTypes.OK) { 
+                if (response.Status == GeocodeResult.StatusTypes.OK) { 
                     foreach (var sublocality in response.Results.FirstOrDefault().GetSublocalities())
                         Console.WriteLine(sublocality.LongName);
 
@@ -72,7 +72,7 @@ namespace ApiDemo
             });
             try
             {
-                if (response.Status == GeoCodeResult.StatusTypes.OK)
+                if (response.Status == GeocodeResult.StatusTypes.OK)
                     foreach (var sublocality in response.Results.FirstOrDefault().GetSublocalities())
                         Console.WriteLine(sublocality.LongName);
             }
@@ -93,7 +93,33 @@ namespace ApiDemo
             });
             try
             {
-                if (response.Status == GeoCodeResult.StatusTypes.OK)
+                if (response.Status == GeocodeResult.StatusTypes.OK)
+                {
+                    foreach (var sublocality in response.Results.FirstOrDefault().GetSublocalities())
+                        Console.WriteLine(sublocality.LongName);
+                    Assert.IsFalse(response.Results.FirstOrDefault().IsMoreSpecificThan(AddressTypes.locality));
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        [TestMethod]
+        public void TestWithError()
+        {
+            GeocodeClient geoClient = new GeocodeClient("https://maps.googleapis.com/maps/api/", "AIzaSyBepGH1lMmdhpQ9CIpq6ip6dep3ACzdFMs", "BR");
+            var response = geoClient.GetLocationByAddress(new GeocodeRequestInfo()
+            {
+                PlaceNumber = 44,
+                CityName = "Santa Luzia",
+                PublicPlaceName = "Estevao da Rocha"
+            });
+            try
+            {
+                if (response.Status == GeocodeResult.StatusTypes.OK)
                 {
                     foreach (var sublocality in response.Results.FirstOrDefault().GetSublocalities())
                         Console.WriteLine(sublocality.LongName);
